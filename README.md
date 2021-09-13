@@ -1,6 +1,6 @@
 # Ricky e Morty APP
 
-Pequena consulta, visualização e cadastro de personagens favoritos do seriado Ricky & Morty.
+Pequena consulta e visualização do seriado Ricky & Morty.
 
 ## Para usar o projeto
 
