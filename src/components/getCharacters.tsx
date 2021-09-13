@@ -5,15 +5,31 @@ import notfound from "../images/not-found.png";
 
 const GetCharacter: React.FC = () => {
   const [character, setCharacter] = useState<Array<charactersData>>([]);
-
+  const [favorite, setFavorite] = useState<Array<charactersData>>([]);
   const [searchName, setSearchName] = useState<string>("");
-
   const [search, setSearch] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   const onChangeSearchName = (e: ChangeEvent<HTMLInputElement>) => {
     const searchName = e.target.value;
     setSearchName(searchName);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("favorite", JSON.stringify(favorite));
+  }, [favorite]);
+
+  const newFavorite = () => {
+    Service.getAll()
+      .then((response) => {
+        const favoritos = response.data.results;
+        console.log(favoritos);
+        const salvar = JSON.stringify(favoritos);
+        localStorage.setItem("favoritos", salvar);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   useEffect(() => {
@@ -120,6 +136,7 @@ const GetCharacter: React.FC = () => {
                         marginTop: -15,
                         marginLeft: 10,
                       }}
+                      onClick={newFavorite}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
