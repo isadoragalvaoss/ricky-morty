@@ -20,32 +20,21 @@ const GetCharacter: React.FC = () => {
   }, []);
 
   const retrieveCharacter = () => {
-    Service.getAll()
-      .then((response) => {
-        setCharacter(response.data.results);
-        console.log(response.data.results);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    Service.getAll().then((response) => {
+      setCharacter(response.data.results);
+    });
   };
 
   useEffect(() => {
     retriCharacter();
+    // eslint-disable-next-line
   }, [searchName]);
 
   const retriCharacter = () => {
-    Service.get(searchName)
-      .then((response) => {
-        setCharacter(response.data.results);
-        console.log(response.data.results);
-        setSearch(false);
-        console.log(search);
-      })
-      .catch((e) => {
-        setSearch(true);
-        console.log(search);
-      });
+    Service.get(searchName).then((response) => {
+      setCharacter(response.data.results);
+      setSearch(false);
+    });
   };
 
   return (
@@ -65,7 +54,8 @@ const GetCharacter: React.FC = () => {
       <div className="row" style={{ width: "50%" }}>
         {character &&
           character
-            .filter((characte) => {
+            //eslint-disable-next-line
+            .filter((characte, index) => {
               if (searchName === "") {
                 return characte;
               } else if (
@@ -74,8 +64,9 @@ const GetCharacter: React.FC = () => {
                 return characte;
               }
             })
+
             .map((characte, index) => (
-              <div style={{}}>
+              <div style={{}} key={index}>
                 <div
                   className="card"
                   style={{
@@ -89,7 +80,7 @@ const GetCharacter: React.FC = () => {
                   <img
                     className="card-img-top"
                     src={characte.image}
-                    alt="image"
+                    alt="imag"
                     style={{}}
                   />
 
@@ -111,7 +102,7 @@ const GetCharacter: React.FC = () => {
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"
                       />
                       <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
