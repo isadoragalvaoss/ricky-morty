@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+import getCharacters from "./components/getCharacters";
+import navImage from "./images/nav-image.png";
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={{ backgroundColor: "#808080" }}>
+      <BrowserRouter>
+        <nav
+          className="navbar navbar-expand navbar-dark"
+          style={{ backgroundColor: "#009ABF" }}
         >
-          Learn React
-        </a>
-      </header>
+          <div className="navbar-nav mr-5" style={{ justifyContent: "center" }}>
+            <img
+              src={navImage}
+              alt="Ricky and Morty nav"
+              style={{
+                width: "50%",
+                height: "70%",
+              }}
+            />
+          </div>
+        </nav>
+
+        <div className="container mt-3">
+          <Switch>
+            <Route
+              exact
+              path={["/", "/characters"]}
+              component={getCharacters}
+            />
+          </Switch>
+        </div>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
